@@ -1,1 +1,17 @@
 GET http://localhost:3000/photos
+POST http://localhost:3000/photos
+
+GET http://localhost:3000/userss
+POST http://localhost:3000/users
+
+GET http://localhost:3000/foods
+POST http://localhost:3000/foods
+
+GET http://localhost:3000/dishes
+POST http://localhost:3000/dishes
+
+GET http://localhost:3000/ingredients
+POST http://localhost:3000/ingredients
+
+GET http://localhost:3000/recommendations
+POST http://localhost:3000/recommendations

@@ -23,7 +23,7 @@ connectDB().then((connection) => {
     app.use('/ingredients', ingredientRoutes);
     app.use('/foods', foodRoutes);
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 }).catch(err => {
     console.error('Failed to connect to the database:', err);

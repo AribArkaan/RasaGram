@@ -4,6 +4,7 @@ exports.createDish = async (req, res) => {
     const dishData = {
         name: req.body.name,
         description: req.body.description,
+        cooking_time: req.body.cooking_time // Menyesuaikan dengan atribut tabel dishes
     };
 
     try {

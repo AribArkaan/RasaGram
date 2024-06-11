@@ -1,11 +1,21 @@
-const getDishes = (req, res) => {
-    // Logic to get dishes from database
-    res.json({ message: "Get all dishes" });
+const Dish = require('../models/dish');
+
+const getDishes = async (req, res) => {
+    try {
+        const dishes = await Dish.getDishes();
+        res.status(200).json(dishes);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch dishes' });
+    }
 };
 
-const createDish = (req, res) => {
-    // Logic to create a new dish
-    res.json({ message: "Dish created" });
+const createDish = async (req, res) => {
+    try {
+        const dish = await Dish.createDish(req.body);
+        res.status(201).json(dish);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to create dish' });
+    }
 };
 
 module.exports = {

@@ -17,7 +17,7 @@ const uploadPhoto = async (req, res) => {
         filename: req.file.filename,
         path: req.file.path,
         description: req.body.description,
-        url: req.body.url // Menggunakan url jika disertakan, atau null jika tidak
+        url: req.body.url 
     };
 
     try {

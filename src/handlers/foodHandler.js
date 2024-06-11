@@ -22,3 +22,12 @@ exports.getFoodById = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch food' });
     }
 };
+
+exports.getFoods = async (req, res) => {
+    try {
+        const foods = await Food.getFoods();
+        res.status(200).json(foods);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch foods' });
+    }
+};
