@@ -1,4 +1,14 @@
+const { loadJsonFile } = require('../utils/jsonLoader');
 const Recommendation = require('../models/recommendation');
+
+exports.getBestModel = (req, res) => {
+    try {
+        const bestModel = loadJsonFile('best_model.json');
+        res.status(200).json(bestModel);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to load best model' });
+    }
+};
 
 exports.createRecommendation = async (req, res) => {
     const recommendationData = {

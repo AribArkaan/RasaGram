@@ -5,12 +5,13 @@ const photoRoutes = require('./routes/photoRoutes');
 const dishRoutes = require('./routes/dishRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 const foodRoutes = require('./routes/foodRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 const app = express();
 
 app.use(express.json());
 
-
+// Ensure connection is established before using routes
 connectDB().then((connection) => {
     app.use((req, res, next) => {
         req.db = connection;
@@ -22,6 +23,7 @@ connectDB().then((connection) => {
     app.use('/dishes', dishRoutes);
     app.use('/ingredients', ingredientRoutes);
     app.use('/foods', foodRoutes);
+    app.use('/recommendations', recommendationRoutes);
 
     const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
