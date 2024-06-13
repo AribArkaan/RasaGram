@@ -84,24 +84,23 @@ INSERT INTO `ingredients` (`id`, `name`, `quantity`, `unit`) VALUES
 	(2, 'Cheese', 100.00, 'grams'),
 	(3, 'Basil', 10.00, 'leaves');
 
--- Dumping structure for table RasaGram.photos
-CREATE TABLE IF NOT EXISTS `photos` (
+-- Dumping structure for table RasaGram.photo
+CREATE TABLE IF NOT EXISTS `photo` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int DEFAULT NULL,
-  `filename` varchar(255) NOT NULL DEFAULT 'default.jpg, default.jpeg',
-  `path` varchar(255) NOT NULL,
+  `filename` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `url` varchar(255) NOT NULL,
-  `description` varchar(500) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `photos_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table RasaGram.photos: ~1 rows (approximately)
-INSERT INTO `photos` (`id`, `user_id`, `filename`, `path`, `created_at`, `url`, `description`) VALUES
-	(1, 1, 'default.jpg, default.jpeg', '/uploads/Margherita Pizza.jpeg', '2024-06-10 15:36:05', '/uploads/Margherita Pizza.jpeg', 'Delicious Margherita Pizza'),
-	(2, 3, 'Margherita Pizza.jpeg', 'E:\\kuliah\\TAHUN 3\\semester 2\\MSIB Bangkit - Cloud computing\\projek\\RasaGram\\uploads\\Margherita Pizza.jpeg', '2024-06-11 07:35:10', 'http://example.com/photos/Margherita_Pizza.jpeg', 'Deskripsi foto Anda');
+-- Dumping data for table RasaGram.photo: ~1 rows (approximately)
+INSERT INTO `photo` (`id`, `user_id`, `filename`, `path`, `created_at`, `url`, `description`) VALUES
+	(1, 1, 'image-1718256891897-823774718.jpg', 'E:\\kuliah\\TAHUN 3\\semester 2\\MSIB Bangkit - Cloud computing\\projek\\RasaGram\\src\\uploads\\image-1718256891897-823774718.jpg', '2024-06-13 05:34:52', '/uploads/image-1718256891897-823774718.jpg', 'enak beutt');
 
 -- Dumping structure for table RasaGram.recommendations
 CREATE TABLE IF NOT EXISTS `recommendations` (
@@ -128,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table RasaGram.users: ~1 rows (approximately)
+-- Dumping data for table RasaGram.users: ~0 rows (approximately)
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`) VALUES
 	(1, 'john_doe', 'john@example.com', 'password123', '2024-06-10 15:12:58'),
 	(3, 'john_doe', 'john.doe@example.com', 'SecureP@ssword123', '2024-06-11 06:38:11');

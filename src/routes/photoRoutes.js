@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await req.db.query('SELECT * FROM photos');
+        const [rows] = await req.db.query('SELECT * FROM photo');
         res.json(rows);
     } catch (err) {
         console.error(err);

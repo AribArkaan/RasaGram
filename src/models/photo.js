@@ -4,7 +4,7 @@ exports.createPhoto = async (photoData) => {
     try {
         const connection = await connectDB();
         const [result] = await connection.execute(
-            'INSERT INTO photos (user_id, filename, path, description, url) VALUES (?, ?, ?, ?, ?)', 
+            'INSERT INTO photo (user_id, filename, path, description, url) VALUES (?, ?, ?, ?, ?)', 
             [photoData.user_id, photoData.filename, photoData.path, photoData.description, photoData.url]
         );
         return { id: result.insertId, ...photoData };

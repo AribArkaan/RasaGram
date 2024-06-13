@@ -1,10 +1,10 @@
 const Photo = require('../models/photo');
 
-const getPhotos = async (req, res) => {
+const getPhoto = async (req, res) => {
     try {
         // Memanggil logika untuk mendapatkan foto dari database
-        const photos = await Photo.getPhotos();
-        res.json(photos);
+        const photo = await Photo.getPhoto();
+        res.json(photo);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: 'Server error' });
@@ -30,6 +30,6 @@ const uploadPhoto = async (req, res) => {
 };
 
 module.exports = {
-    getPhotos,
+    getPhoto,
     uploadPhoto,
 };
