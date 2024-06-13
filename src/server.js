@@ -6,10 +6,18 @@ const dishRoutes = require('./routes/dishRoutes');
 const ingredientRoutes = require('./routes/ingredientRoutes');
 const foodRoutes = require('./routes/foodRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 
 app.use(express.json());
+
+// Ensure the uploads directory exists
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
 // Ensure connection is established before using routes
 connectDB().then((connection) => {

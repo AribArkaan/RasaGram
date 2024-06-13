@@ -1,34 +1,30 @@
-const { loadJsonFile } = require('../utils/jsonLoader');
-const Recommendation = require('../models/recommendation');
+// src/handlers/recommendationHandler.js
 
-exports.getBestModel = (req, res) => {
+const { processImage, getDishDetails } = require('../services/inferenceService');
+
+exports.uploadImage = async (req, res) => {
     try {
-        const bestModel = loadJsonFile('best_model.json');
-        res.status(200).json(bestModel);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to load best model' });
-    }
-};
+        const { user_id, description } = req.body; // assuming user_id and description are passed in the request body
+        const filePath = req.file.path;
+        const fileName = req.file.filename;
 
-exports.createRecommendation = async (req, res) => {
-    const recommendationData = {
-        photo_id: req.body.photo_id,
-        dish_id: req.body.dish_id,
-    };
+        const labelId = await processImage(filePath);
+        const dishDetails = getDishDetails(labelId);
 
-    try {
-        const recommendation = await Recommendation.createRecommendation(recommendationData);
-        res.status(201).json(recommendation);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to create recommendation' });
-    }
-};
+        const query = 'INSERT INTO photo (user_id, filename, path, url, description) VALUES (?, ?, ?, ?, ?)';
+        const values = [
+            user_id,
+            fileName,
+            filePath,
+            `http://localhost:3001/uploads/${fileName}`, // Assuming this is how URL is constructed
+            description
+        ];
 
-exports.getRecommendationsByPhotoId = async (req, res) => {
-    try {
-        const recommendations = await Recommendation.getRecommendationsByPhotoId(req.params.photoId);
-        res.status(200).json(recommendations);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch recommendations' });
+        await req.db.query(query, values);
+
+        res.status(200).json({ ...dishDetails, filePath, fileName });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Failed to upload and process image' });
     }
 };
